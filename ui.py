@@ -31,10 +31,10 @@ def display_expenses(expenses : list)->None:
         else:
             tracker.cursor.execute("SELECT * FROM categories")
             categories_dict = {id : name for id,name in tracker.cursor.fetchall()}
-            print(f'\n{'ID':<5}{'Amount':<8}{'Category':<12}{'Date':<15}{'Description':<15}')
+            print(f"\n{'ID':<5}{'Amount':<8}{'Category':<12}{'Date':<15}{'Description':<15}")
             print("-"*55)
             for row in expenses:
-                print(f"{row.id:<5}{row.amount:<8}{categories_dict[row.category_id]:<12}{row.date:<15}{"" if row.description is None else row.description}")
+                print(f'{row.id:<5}{row.amount:<8}{categories_dict[row.category_id]:<12}{row.date:<15}{"" if row.description is None else row.description}')
 
 
 def add_expense_ui()-> None:
@@ -56,7 +56,7 @@ def add_expense_ui()-> None:
     if expense_id is None:
         print("Failed to add Expense")
     else:
-        print(f"Expense added sucessfully. ID = {expense_id}\n")
+        print(f"Expense added successfully. ID = {expense_id}\n")
 
 def view_expense_ui()-> None:
     while True:
@@ -136,7 +136,7 @@ def update_expenses_ui() -> None:
         date = input("Enter Date (YYYY-MM-DD): ")
         row_count = tracker.update_expense(expense_id=expense_id, amount=amount, category_id=category, date= date,description=description)
         if row_count == 1:
-            print("Expense updated sucessfully")
+            print("Expense updated successfully")
         elif row_count == 0:
             print("Expense was not updated")
 
@@ -153,10 +153,10 @@ def delete_expense_ui()-> None:
         print("Expense not found")
     else:
         validation = input("Are you sure you want to delete this expense? (y/n): ")
-        if validation == 'y':
+        if validation.lower() == 'y':
             row_count = tracker.delete_expense(expense_id=expense_id)
             if row_count == 1:
-                print("Expense deleted sucessfully")
+                print("Expense deleted successfully")
             elif row_count == 0:
                 print("Failed to delete expense")  
         else:
